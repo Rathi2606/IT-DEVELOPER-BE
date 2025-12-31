@@ -1,3 +1,7 @@
+- Link to the *live frontend* : "https://it-developer-rathi.netlify.app"
+- Link to the *live backend* : "https://it-developer-be-rathi.onrender.com"
+- Link to the *Frontend GitHub*: "https://github.com/Rathi2606/IT-DEVELOPER"
+
 # TaskLane Backend
 
 A robust Express.js backend API for TaskLane, a collaborative task management and kanban board application. Built with TypeScript, MongoDB, and Clerk authentication.
