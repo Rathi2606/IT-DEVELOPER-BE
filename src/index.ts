@@ -22,5 +22,6 @@ app.use("/api/kanban", kanbanRouter);
 app.use(globalErrorHandlingMiddleware);
 
 // Define the port to run the server
-const PORT = 8000;
+
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}...`));
