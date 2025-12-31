@@ -15,11 +15,11 @@ const app = (0, express_1.default)();
 app.use((0, express_2.clerkMiddleware)());
 // Middleware to parse the JSON data in the request body
 app.use(express_1.default.json());
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({ origin: "https://it-developer-rathi.netlify.app" }));
 (0, db_1.default)();
 app.use("/api/kanban", kanban_1.default);
 app.use(global_error_handling_middleware_1.default);
 // Define the port to run the server
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}...`));
 //# sourceMappingURL=index.js.map

@@ -44,7 +44,7 @@ const markNotificationAsRead = async (req, res, next) => {
         if (notification.userId !== userId) {
             throw new forbidden_error_1.default("Unauthorized");
         }
-        await Notification_1.default.findByIdAndUpdate(notificationId, { isRead: true });
+        await Notification_1.default.findByIdAndUpdate(notificationId, { read: true });
         res.status(200).send();
     }
     catch (error) {
@@ -58,7 +58,7 @@ const markAllNotificationsAsRead = async (req, res, next) => {
         if (!userId) {
             throw new validation_error_1.default("User ID is required");
         }
-        await Notification_1.default.updateMany({ userId, isRead: false }, { isRead: true });
+        await Notification_1.default.updateMany({ userId, read: false }, { read: true });
         res.status(200).send();
     }
     catch (error) {
@@ -72,7 +72,7 @@ const getUnreadNotificationCount = async (req, res, next) => {
         if (!userId) {
             throw new validation_error_1.default("User ID is required");
         }
-        const count = await Notification_1.default.countDocuments({ userId, isRead: false });
+        const count = await Notification_1.default.countDocuments({ userId, read: false });
         res.status(200).json({ count });
     }
     catch (error) {

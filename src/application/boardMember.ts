@@ -148,7 +148,7 @@ export const removeMemberFromBoard = async (
       throw new ForbiddenError("Cannot remove board owner");
     }
 
-    board.members = board.members.filter((m: any) => m.userId !== targetUserId);
+    board.members = board.members.filter((m: any) => m.userId !== targetUserId) as any;
     await board.save();
 
     res.status(200).send();

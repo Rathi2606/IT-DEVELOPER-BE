@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const globalErrorHandlingMiddleware = (error, req, res, next) => {
-    console.log(error);
+    console.error("Error:", error);
     if (error.name === "NotFoundError") {
         res.status(404).json({ message: error.message });
         return;
     }
     if (error.name === "ValidationError") {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ message: error.message, error: error.message });
         return;
     }
     if (error.name === "UnauthorizedError") {
@@ -18,7 +18,9 @@ const globalErrorHandlingMiddleware = (error, req, res, next) => {
         res.status(403).json({ message: error.message });
         return;
     }
-    res.status(500).json({ message: "Internal Server Error" });
+    // Log unexpected errors
+    console.error("Unexpected error:", error);
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
 };
 exports.default = globalErrorHandlingMiddleware;
 //# sourceMappingURL=global-error-handling-middleware.js.map

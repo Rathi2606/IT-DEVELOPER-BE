@@ -256,7 +256,8 @@ const createCard = async (req, res, next) => {
     try {
         const cardData = kanban_1.CreateCardDTO.safeParse(req.body);
         if (!cardData.success) {
-            throw new validation_error_1.default(cardData.error.message);
+            const errors = cardData.error.errors.map(e => `${e.path.join('.')}: ${e.message}`).join('; ');
+            throw new validation_error_1.default(`Validation failed: ${errors}`);
         }
         const { boardId, columnId } = cardData.data;
         const userId = req.auth?.userId;
