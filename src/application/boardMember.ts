@@ -148,7 +148,10 @@ export const removeMemberFromBoard = async (
       throw new ForbiddenError("Cannot remove board owner");
     }
 
-    board.members = board.members.filter((m: any) => m.userId !== targetUserId) as any;
+    const memberIndex = board.members.findIndex((m: any) => m.userId === targetUserId);
+    if (memberIndex !== -1) {
+      board.members.splice(memberIndex, 1);
+    }
     await board.save();
 
     res.status(200).send();
